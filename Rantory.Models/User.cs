@@ -11,5 +11,7 @@ namespace Rantory.Models
     public class User : IdentityUser
     {
         public ICollection<Story> Stories { get; set; }
+
+        public string? ProfileImg { get; set; }
     }
 }

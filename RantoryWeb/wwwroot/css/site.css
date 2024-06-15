@@ -20,3 +20,62 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+
+
+
+
+.my-profile-pic {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.my-profile-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.my-story-topic {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.my-story-content {
+    font-size: 14px;
+    color: #666;
+    margin: 10px 0;
+}
+
+.my-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .my-btn:hover {
+        background-color: #0056b3;
+    }
+
+.my-settings-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #6c757d;
+}
+
+    .my-settings-btn:hover {
+        background-color: #5a6268;
+    }

@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RantoryWeb", "RantoryWeb\RantoryWeb.csproj", "{43ADD161-2C47-4B9A-9F43-247B9D7D820E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RantoryWeb", "RantoryWeb\RantoryWeb.csproj", "{43ADD161-2C47-4B9A-9F43-247B9D7D820E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rantory.DataAccess", "Rantory.DataAccess\Rantory.DataAccess.csproj", "{7B78DD9D-8F10-4C6C-A2D1-9A60955EF701}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rantory.DataAccess", "Rantory.DataAccess\Rantory.DataAccess.csproj", "{7B78DD9D-8F10-4C6C-A2D1-9A60955EF701}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rantory.Models", "Rantory.Models\Rantory.Models.csproj", "{2F790FD4-5C0E-4B47-900C-07AACCB24D57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rantory.Models", "Rantory.Models\Rantory.Models.csproj", "{2F790FD4-5C0E-4B47-900C-07AACCB24D57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rantory.Utility", "Rantory.Utility\Rantory.Utility.csproj", "{CBD54831-7B07-49B5-BB32-FD80CD1EA18E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{2F790FD4-5C0E-4B47-900C-07AACCB24D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F790FD4-5C0E-4B47-900C-07AACCB24D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F790FD4-5C0E-4B47-900C-07AACCB24D57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBD54831-7B07-49B5-BB32-FD80CD1EA18E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBD54831-7B07-49B5-BB32-FD80CD1EA18E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBD54831-7B07-49B5-BB32-FD80CD1EA18E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBD54831-7B07-49B5-BB32-FD80CD1EA18E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

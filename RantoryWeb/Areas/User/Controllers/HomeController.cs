@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace Rantory.Areas.User.Controllers
 {
+    [Area("User")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
