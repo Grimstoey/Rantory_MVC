@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Rantory.DataAccess
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Story> Stories { get; set; }
         public DbSet<Chapter> Chapters { get; set; }

@@ -24,58 +24,203 @@ body {
 
 
 
+/*MY CSS*/
 
 
-.my-profile-pic {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+/*--- Root ---*/
+:root {
+    --my-primary: #86275e;
+    --my-secondary: #EDDD5E;
+    --my-light: #F7F7F7;
+    --my-dark: #404A3D;
 }
 
-.my-profile-name {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 10px 0;
+/*--- Profile ---*/
+.my-profile {
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 0 45px rgba(0, 0, 0, .07);
+    display: flex; /* Use Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: flex-start; /* Align items to the top */
 }
 
-.my-story-topic {
-    font-size: 16px;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.my-story-content {
-    font-size: 14px;
-    color: #666;
-    margin: 10px 0;
-}
-
-.my-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-    .my-btn:hover {
-        background-color: #0056b3;
+    .my-profile .profile-img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 8px;
+        overflow: hidden;
+        z-index: -1;
     }
 
-.my-settings-btn {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #6c757d;
+        .my-profile .profile-img img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+    .my-profile .pic-frame {
+        width: 140px;
+        height: 140px;
+        padding: 15px;
+        margin-top: -70px;
+        margin-bottom: 40px;
+        background: #FFFFFF;
+        border-radius: 140px;
+        overflow: hidden;
+        box-shadow: 0 0 60px rgba(0, 0, 0, .1);
+        display: flex;
+        justify-content: center; /* Centers the image horizontally */
+        align-items: center; /* Centers the image vertically */
+        margin-left: auto; /* Center the frame horizontally */
+        margin-right: auto; /* Center the frame horizontally */
+    }
+
+        .my-profile .pic-frame img {
+            border-radius: 50%; /* Ensures the image is circular */
+            width: 100%;
+            height: auto;
+        }
+
+    .my-profile .p-5 {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center the content inside the container */
+    }
+
+
+/*--- Button ---*/
+
+.my-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-    .my-settings-btn:hover {
-        background-color: #5a6268;
+.my-box {
+    width: 200px;
+    height: auto;
+    float: left;
+    transition: .2s linear;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 15px;
+    text-align: center;
+    margin: 0 5px;
+    background: transparent;
+    text-transform: uppercase;
+    /*font-weight: 500;*/
+    border-radius: 40px; /* Add this line to round the edges */
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+    .my-box:before {
+        position: absolute;
+        content: '';
+        left: 0;
+        bottom: 0;
+        height: 4px;
+        width: 100%;
+        border-bottom: 2px solid transparent;
+        border-left: 4px solid transparent;
+        border-radius: 40px;
+        box-sizing: border-box;
+        transform: translateX(100%);
+    }
+
+    .my-box:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        border-top: 1px solid transparent;
+        border-right: 4px solid transparent;
+        border-radius: 40px;
+        box-sizing: border-box;
+        transform: translateX(-100%);
+    }
+
+    .my-box:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+        .my-box:hover:before {
+            border-color: #86275e;
+            border-radius: 40px;
+            height: 100%;
+            transform: translateX(0);
+            transition: .3s transform linear, .2s height linear .1s;
+        }
+
+        .my-box:hover:after {
+            border-color: #86275e;
+            border-radius: 40px;
+            height: 100%;
+            transform: translateX(0);
+            transition: .3s transform linear, .2s height linear .1s;
+        }
+
+.my-button {
+    color: #5D5D5D;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+    .my-button:hover {
+        font-weight: bold;
+        color: #217243;
+    }
+
+
+/*--- Section Title ---*/
+.my-section-title {
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #217243;
+}
+
+    .my-section-title::before {
+        position: absolute;
+        content: "";
+        width: calc(100% + 80px);
+        height: 2px;
+        top: 5px;
+        left: -40px;
+        background: var(--my-primary);
+        z-index: -1;
+    }
+
+    .my-section-title::after {
+        position: absolute;
+        content: "";
+        width: calc(100% + 120px);
+        height: 2px;
+        bottom: 6px;
+        left: -60px;
+        background: var(--my-primary);
+        z-index: -1;
+    }
+
+    .my-section-title.text-start::before {
+        width: calc(100% + 40px);
+        left: 0;
+    }
+
+    .my-section-title.text-start::after {
+        width: calc(100% + 60px);
+        left: 0;
     }

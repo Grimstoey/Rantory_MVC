@@ -34,6 +34,18 @@
         <link href="~/dairyTheme/css/style.css" rel="stylesheet">    
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/RantoryWeb.styles.css" asp-append-version="true" />
+
+        <!-- Text area Api -->
+        <script src="https://cdn.tiny.cloud/1/hdesn9pk1wk5vby2qasvnheh8zhw2r998jdae1qoufjxb4xq/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+            });
+        </script>
+
+
     </head>
 
     <body>
@@ -117,6 +129,7 @@
 
         <!-- Template Javascript -->
         <script src="~/dairyTheme/js/main.js"></script>
+
 
         @await RenderSectionAsync("Scripts", required: false)
     </body>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Rantory.Models
 {
-    public class User : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         public ICollection<Story> Stories { get; set; }
 

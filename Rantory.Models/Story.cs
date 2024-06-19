@@ -25,7 +25,7 @@ namespace Rantory.Models
 
         public string UserId { get; set; }
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
 
 
         ICollection<Chapter> Chapters { get; set; }
