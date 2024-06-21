@@ -35,7 +35,7 @@
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/RantoryWeb.styles.css" asp-append-version="true" />
 
-        <!-- Text area Api -->
+        <!-- Text editer area Api -->
         <script src="https://cdn.tiny.cloud/1/hdesn9pk1wk5vby2qasvnheh8zhw2r998jdae1qoufjxb4xq/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
         <script>
             tinymce.init({
@@ -45,7 +45,7 @@
             });
         </script>
 
-
+              
     </head>
 
     <body>
@@ -61,7 +61,7 @@
         <header>
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5">
-                <a href="index.html" class="navbar-brand d-flex align-items-center">
+                <a asp-area="User" asp-controller="Home" asp-action="Index" class="navbar-brand d-flex align-items-center">
                     <h1 class="m-0">Rantory</h1>
                 </a>
                 <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -100,21 +100,14 @@
         
    
         <!-- Footer Start -->
-        <footer>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="fw-semi-bold" href="#">Your Site Name</a>, All Right Reserved.
-                    </div>                  
-                </div>
+        <footer class="border-top footer text-muted ">
+            <div class="text-center">
+                Made with <i class="bi bi-heart-fill"></i> by DotNetMastery
             </div>
-           
         </footer>
         <!-- Footer End -->
 
-
-
+      
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -126,6 +119,12 @@
         <script src="~/dairyTheme/lib/counterup/counterup.min.js"></script>
         <script src="~/dairyTheme/lib/parallax/parallax.min.js"></script>
         <script src="~/dairyTheme/lib/lightbox/js/lightbox.min.js"></script>
+
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
 
         <!-- Template Javascript -->
         <script src="~/dairyTheme/js/main.js"></script>

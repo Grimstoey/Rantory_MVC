@@ -1,5 +1,5 @@
 ﻿
-<!-- Service Start -->
+<!-- Home Page Index -->
 <div class="container-xxl py-5">
     <div class="container">
         
@@ -14,19 +14,25 @@
                         <div class="text-center">
                             <h5>Profile Name</h5>
                         </div>
+
+                        <!-- About me start -->
                         <div class="pt-3">
                             <p class="my-section-title bg-white text-center px-3">About Me</p>
                         </div>
                         <div>
                             <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>                           
                         </div>
+                        <!-- About me end-->
+
+                        <!-- Profile story start -->
                         <div class="text-center">
                             <p class="my-section-title bg-white text-center px-3">Story</p>                         
                         </div>
-                        <div class="my-button-container">
-                            <a asp-area="User" asp-controller="Story" asp-action="Index" class="my-button my-box">New Story</a>
-                            <a class="my-button my-box mt-3" href="">Continue Story</a>
+                        <div class="my-profile-button-container">
+                            <a asp-area="User" asp-controller="Chapter" asp-action="CreateChapter" class="my-profile-button my-box">New Story</a>
+                            <a asp-area="User" asp-controller="Chapter" asp-action="Index" class="my-profile-button my-box mt-3">Continue Write</a>
                         </div>
+                        <!-- Profile story end -->
                     </div>
                 </div>
             </div>
@@ -64,82 +70,6 @@
         </div>
     </div>
 </div>
-<!-- Service End -->
 
 
-<!-- Product Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-            <p class="section-title bg-white text-center text-primary px-3">Our Products</p>
-            <h1 class="mb-5">Our Dairy Products For Healthy Living</h1>
-        </div>
-        <div class="row gx-4">
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="product-item">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/product-1.jpg" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <a class="d-block h5" href="">Pure Milk</a>
-                        <span class="text-primary me-1">$19.00</span>
-                        <span class="text-decoration-line-through">$29.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="product-item">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/product-2.jpg" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <a class="d-block h5" href="">Fresh Meat</a>
-                        <span class="text-primary me-1">$19.00</span>
-                        <span class="text-decoration-line-through">$29.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="product-item">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/product-3.jpg" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <a class="d-block h5" href="">Dairy Products</a>
-                        <span class="text-primary me-1">$19.00</span>
-                        <span class="text-decoration-line-through">$29.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="product-item">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/product-4.jpg" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <a class="d-block h5" href="">Organic Food</a>
-                        <span class="text-primary me-1">$19.00</span>
-                        <span class="text-decoration-line-through">$29.00</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Product End -->
+

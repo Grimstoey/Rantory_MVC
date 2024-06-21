@@ -13,22 +13,14 @@ namespace Rantory.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public string Title { get; set; }
-
-        [Required]
-        [Display(Name = "Strat")]
-        public DateTime DateStart { get; set; }
-        [Required]
-        [Display(Name = "Finish")]
-        public DateTime DateFinish { get; set; }
+        public string? Title { get; set; }
 
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public ApplicationUser User { get; set; }
 
-
-        ICollection<Chapter> Chapters { get; set; }
+        [Required]
+        public ICollection<Chapter> Chapters { get; set; } = [];
 
     }
 }

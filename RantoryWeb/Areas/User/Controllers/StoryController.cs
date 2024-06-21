@@ -18,5 +18,12 @@ namespace RantoryWeb.Areas.User.Controllers
         {
             return View();
         }
+
+        public IActionResult CreateFiction()
+        {
+
+
+            return View();
+        }
     }
 }

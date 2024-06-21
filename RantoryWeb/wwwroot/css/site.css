@@ -97,10 +97,17 @@ body {
 
 /*--- Button ---*/
 
-.my-button-container {
+.my-profile-button-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.button-container-end {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end; /* Aligns items to the end of the container */
+    gap: 10px; /* Adds some space between the buttons */
 }
 
 .my-box {
@@ -169,7 +176,7 @@ body {
             transition: .3s transform linear, .2s height linear .1s;
         }
 
-.my-button {
+.my-profile-button {
     color: #5D5D5D;
     text-decoration: none;
     cursor: pointer;
@@ -178,10 +185,59 @@ body {
     background: transparent;
 }
 
-    .my-button:hover {
+    .my-profile-button:hover {
         font-weight: bold;
         color: #217243;
+        
     }
+
+.save-box {
+    width: 200px;
+    height: auto;
+    float: left;
+    transition: .2s linear;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 15px;
+    text-align: center;
+    margin: 0 5px;
+    background-color: #FFDB58;
+    text-transform: uppercase;
+    border-radius: 40px; /* Add this line to round the edges */    
+}
+
+    .save-box:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+.save-button {
+    color: #217243;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+    cursor: pointer;
+    outline: none;
+    background: transparent;
+    border: 2px solid #86275e; /* Add this line to specify the border */
+    border-radius: 40px; /* Optional: Add this line if you want rounded corners */
+    padding: 10px 20px; /* Optional: Adjust padding for better button appearance */
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+    border-left: 4px solid;
+    border-right: 4px solid;
+    border-color: #86275e;
+}
+
+    .save-button:hover {
+        font-weight: bold;
+        /*color: #217243;*/
+        color: #fff9cc;
+        border-color: #86275e; /* Optional: Change border color on hover */
+        background-color: #86275e;
+        /*background-color: #fff9cc;*/
+    }
+
 
 
 /*--- Section Title ---*/
@@ -224,3 +280,54 @@ body {
         width: calc(100% + 60px);
         left: 0;
     }
+
+
+/*--- Form ---*/
+
+.chapter-form-control {
+    border-radius: 25px; /* Adjust the value to make it more or less rounded */
+    padding: 10px 20px; /* Add some padding for better spacing */
+    border: 2px solid #ccc; /* Add a border color */
+    transition: border-color 0.2s ease-in-out; /* Add a transition for smooth color change */
+    width: 400px; /* Adjust the width as needed */
+}
+
+    .chapter-form-control:focus {
+        border-color: #86275e; /* Change the border color when the input is focused */
+        border-width: 2px; /* Adjust border width on focus */
+        box-shadow: 0 0 10px rgba(158, 82, 126, 0.6); /* Optional: adds a subtle shadow effect */
+        outline: none; /* Remove the default outline */
+    }
+
+.chapter-form-floating label {
+    position: absolute;
+    top: 0;
+    left: 420px;
+    padding: 10px 20px;
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+    opacity: 1;
+}
+
+.chapter-form-floating input:focus + label,
+.chapter-form-floating input:not(:placeholder-shown) + label {
+    top: 0px; /* Adjust the position */
+    left: 420px; /* Adjust the position */
+    font-size: 12px; /* Adjust the font size */
+    opacity: 0; /* Make the label disappear */
+}
+
+.chapter-form-floating {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+    .chapter-form-floating input {
+        padding: 10px 20px; /* Add padding inside the input */
+        border-radius: 25px; /* Match the input field border radius */
+        border: 1px solid #ccc; /* Add a border color */
+        transition: border-color 0.2s ease-in-out; /* Add a transition for smooth color change */
+        width: 400px; /* Adjust the width as needed */
+    }
+
+

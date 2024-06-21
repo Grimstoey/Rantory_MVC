@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rantory.DataAccess;
 
@@ -11,9 +12,11 @@ using Rantory.DataAccess;
 namespace Rantory.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240620050539_RequiredChapter")]
+    partial class RequiredChapter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,24 +240,12 @@ namespace Rantory.DataAccess.Migrations
 
                     b.Property<string>("ChapterName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("StoryId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Chapters");
                 });
@@ -332,21 +323,6 @@ namespace Rantory.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Rantory.Models.Chapter", b =>
-                {
-                    b.HasOne("Rantory.Models.Story", null)
-                        .WithMany("Chapters")
-                        .HasForeignKey("StoryId");
-
-                    b.HasOne("Rantory.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Rantory.Models.Story", b =>
                 {
                     b.HasOne("Rantory.Models.ApplicationUser", "User")
@@ -361,11 +337,6 @@ namespace Rantory.DataAccess.Migrations
             modelBuilder.Entity("Rantory.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Stories");
-                });
-
-            modelBuilder.Entity("Rantory.Models.Story", b =>
-                {
-                    b.Navigation("Chapters");
                 });
 #pragma warning restore 612, 618
         }
