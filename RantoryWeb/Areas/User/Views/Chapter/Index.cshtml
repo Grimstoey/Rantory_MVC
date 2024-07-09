@@ -1,79 +1,63 @@
-﻿@model IEnumerable<UserChapterVM>
+﻿@* @model IEnumerable<UserChapterVM> *@
 
 
 <!-- Chapter Index Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-            <p class="section-title bg-white text-center text-primary px-3">All Your Chapter</p>
-            <h3 class="mb-5">Continue The Story</h3>
+
+@* <div class="container-xxl py-5">
+
+    <input asp-for="@Model.First().UserApp.Id" hidden />
+
+    @if(!Model.First().Chapters.Any())
+    {
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <p class="section-title bg-white text-center text-primary px-3">All Your Chapter</p>
+                <h3 class="mb-5">No Story</h3>
+            </div>           
         </div>
-        <div class="row gx-4">
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="product-item">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/product-1.jpg" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <a class="d-block h5" href="">Pure Milk</a>
-                        <span class="text-primary me-1">$19.00</span>
-                        <span class="text-decoration-line-through">$29.00</span>
-                    </div>
-                </div>
+    }
+    else
+    {
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <p class="section-title bg-white text-center text-primary px-3">All Your Chapter</p>
+                <h3 class="mb-5">Continue The Story</h3>
             </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="product-item">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/product-2.jpg" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
+
+            <div class="row gx-4">               
+
+                @foreach (UserChapterVM userChapterVM in Model)
+                {
+                    <input asp-for="@Model.First().UserApp.Id" hidden />
+
+                    <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="product-item">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="~/dairyTheme/img/product-1.jpg" alt="">
+
+                                <div class="product-overlay">
+                                    <div class="icon-button-container">
+                                        <div class="icon-button" data-tooltip="Update Cover Image">
+                                            <a class="icon-button" href=""><i class="bi bi-image"></i></a>
+                                        </div>
+                                        <div class="icon-button" data-tooltip="Delete All Chapter">
+                                            <a class="icon-button" href=""><i class="bi bi-trash3-fill"></i></a>
+                                        </div>                                                                             
+                                    </div>                                   
+                                </div>
+
+                            </div>
+                            <div class="text-center p-4">
+                                <a asp-area="User" asp-controller="Chapter" asp-action="UpdateChapter" class="d-block h5">Untitle 1</a>
+                                <span class="text-primary me-1">0 chapters</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="text-center p-4">
-                        <a class="d-block h5" href="">Fresh Meat</a>
-                        <span class="text-primary me-1">$19.00</span>
-                        <span class="text-decoration-line-through">$29.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="product-item">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/product-3.jpg" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <a class="d-block h5" href="">Dairy Products</a>
-                        <span class="text-primary me-1">$19.00</span>
-                        <span class="text-decoration-line-through">$29.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="product-item">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/product-4.jpg" alt="">
-                        <div class="product-overlay">
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                            <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center p-4">
-                        <a class="d-block h5" href="">Organic Food</a>
-                        <span class="text-primary me-1">$19.00</span>
-                        <span class="text-decoration-line-through">$29.00</span>
-                    </div>
-                </div>
+                }
+
             </div>
         </div>
-    </div>
+    }
+    
 </div>
-<!-- Chapter Index End -->
+<!-- Chapter Index End --> *@

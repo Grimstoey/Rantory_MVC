@@ -8,25 +8,21 @@ using System.Threading.Tasks;
 
 namespace Rantory.Models
 {
-    public class Chapter
+    public class ChapterNameSource
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Chapter name")]
-        public string ChapterName { get; set; } = "";
-
-        public string? Content { get; set; }
-
-        public string UserId { get; set; }
-        [ForeignKey("UserId")]
-        public ApplicationUser? User { get; set; }
+        [Display(Name = "New chapter name")]
+        public string Name { get; set; } = "";
 
         public int StoryId { get; set; }
         [ForeignKey("StoryId")]
         public Story? Story { get; set; }
 
-
+        public int ChapterId { get; set; }
+        [ForeignKey("ChapterId")]
+        public Chapter? Chapter { get; set; }
     }
 }

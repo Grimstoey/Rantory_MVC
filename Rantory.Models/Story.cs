@@ -13,14 +13,13 @@ namespace Rantory.Models
         [Key]
         public int Id { get; set; }
 
-        public string? Title { get; set; }
+        public string? Title { get; set; } = "Untile";
 
         public string UserId { get; set; }
         [ForeignKey("UserId")]
-        public ApplicationUser User { get; set; }
+        public ApplicationUser? User { get; set; }
 
-        [Required]
-        public ICollection<Chapter> Chapters { get; set; } = [];
+        public ICollection<Chapter> Chapters { get; set; } = new List<Chapter>();
 
     }
 }

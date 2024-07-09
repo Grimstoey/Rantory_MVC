@@ -1,25 +1,26 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
 
 
 
@@ -188,7 +189,6 @@ body {
     .my-profile-button:hover {
         font-weight: bold;
         color: #217243;
-        
     }
 
 .save-box {
@@ -204,7 +204,7 @@ body {
     margin: 0 5px;
     background-color: #FFDB58;
     text-transform: uppercase;
-    border-radius: 40px; /* Add this line to round the edges */    
+    border-radius: 40px; /* Add this line to round the edges */
 }
 
     .save-box:hover {
@@ -237,6 +237,314 @@ body {
         background-color: #86275e;
         /*background-color: #fff9cc;*/
     }
+
+
+/*- - - - -*/
+
+.close-button {
+    color: #86275e;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: medium;
+    cursor: pointer;
+    outline: none;
+    background: transparent;
+    border: 2px solid #979797; /* Add this line to specify the border */
+    border-radius: 40px; /* Optional: Add this line if you want rounded corners */
+    padding: 8px 10px; /* Optional: Adjust padding for better button appearance */
+    width: 150px;
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+    border-left: 4px solid;
+    border-right: 4px solid;
+    border-color: #979797;
+}
+
+    .close-button:hover {
+        font-weight: bold;
+        font-size: larger;
+        color: #fff9cc;
+        border-color: #86275e; /* Optional: Change border color on hover */
+        background-color: #86275e;
+    }
+
+
+/*- - - - -*/
+
+.update-button {
+    color: #217243;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: medium;
+    cursor: pointer;
+    outline: none;
+    background: transparent;
+    border: 2px solid #979797; /* Add this line to specify the border */
+    border-radius: 30px; /* Optional: Add this line if you want rounded corners */
+    padding: 8px 10px; /* Optional: Adjust padding for better button appearance */
+    width: 150px;
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+    border-left: 4px solid;
+    border-right: 4px solid;
+    border-color: #979797;
+}
+
+    .update-button:hover {
+        font-weight: bold;
+        font-size: large;
+        color: #fff9cc;
+        border-color: #217243; /* Optional: Change border color on hover */
+        background-color: #217243;
+    }
+
+/*- - - - - */
+
+.delete-button {
+    color: #86275e;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: medium;
+    cursor: pointer;
+    outline: none;
+    background: transparent;
+    border: 2px solid #979797; /* Add this line to specify the border */
+    border-radius: 30px; /* Optional: Add this line if you want rounded corners */
+    padding: 8px 10px; /* Optional: Adjust padding for better button appearance */
+    width: 120px;
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+    border-left: 4px solid;
+    border-right: 4px solid;
+    border-color: #979797;
+}
+
+    .delete-button:hover {
+        font-weight: bold;
+        color: #fff9cc;
+        border-color: #86275e; /* Optional: Change border color on hover */
+        background-color: #86275e;
+    }
+
+/*- - - - - */
+
+.close-delete-button {
+    color: #217243;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: medium;
+    cursor: pointer;
+    outline: none;
+    background: transparent;
+    border: 2px solid #979797; /* Add this line to specify the border */
+    border-radius: 30px; /* Optional: Add this line if you want rounded corners */
+    padding: 8px 10px; /* Optional: Adjust padding for better button appearance */
+    width: 120px;
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+    border-left: 4px solid;
+    border-right: 4px solid;
+    border-color: #217243;
+}
+
+    .close-delete-button:hover {
+        font-weight:bold;
+        color: #fff9cc;
+        background-color: #217243;
+        border-color: #217243; /* Optional: Change border color on hover */
+    }
+
+/*- - - - - */
+.icon-button-story-container {
+    display: flex;
+    gap: 15px; /* Adjust the space between buttons */
+}
+
+.icon-button-story {
+    position: relative; /* Required for positioning the tooltip */
+    width: 45px;
+    height: 45px;
+    background-color: #fff9cc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .icon-button-story:hover {
+        background-color: #86275e;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        transition: color 0.3s ease;
+        border: 0px hidden none;
+    }
+
+    .icon-button-story i {
+        font-size: 20px; /* Adjust the icon size */
+        color: #86275e; /* icon color */
+        border: 0px hidden none;
+    }
+
+    .icon-button-story:hover i {
+        color: #fff9cc; /* Icon color on hover */
+        border: 0px hidden none;
+    }
+
+    .icon-button-story::after {
+        content: attr(data-tooltip); /* Use data-tooltip attribute for text */
+        position: absolute;
+        bottom: 120%; /* Position above the button */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #86275e;
+        color: #fff9cc;
+        padding: 5px 10px;
+        border-radius: 20px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        border: 0px hidden none;
+    }
+
+    .icon-button-story:hover::after {
+        opacity: 1;
+        visibility: visible;
+        border: 0px hidden none;
+    }
+
+.icon-button-story-border-hidden {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/*- - - - -*/
+
+.icon-delete-story-container {
+    display: flex;
+    justify-content: center;
+}
+
+.icon-delete-story i {
+    font-size: 65px; /* Adjust the icon size */
+    color: #86275e; /* icon color */
+    border: 0px hidden none;
+}
+
+
+/*- - - - -*/
+.icon-button-chapter-container {
+    display: flex;
+    gap: 15px; /* Adjust the space between buttons */
+}
+
+.icon-button-chapter {
+    position: relative; /* Required for positioning the tooltip */
+    width: 45px;
+    height: 45px;
+    background-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .icon-button-chapter:hover {
+        background-color: transparent;
+        border: 0px solid #86275e;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        transition: color 0.3s ease;
+    }
+
+    .icon-button-chapter i {
+        font-size: 20px; /* Adjust the icon size */
+        color: #a7a7a7; /* Icon color */
+    }
+
+    .icon-button-chapter:hover i {
+        color: #217243; /* Icon color on hover */
+    }
+
+    .icon-button-chapter::after {
+        content: attr(data-tooltip); /* Use data-tooltip attribute for text */
+        position: absolute;
+        bottom: 110%; /* Position above the button */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: transparent;
+        color: #86275e;
+        padding: 5px 10px;
+        border-radius: 20px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        /*font-weight: bold;*/
+    }
+
+    .icon-button-chapter:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+/*- - - - - */
+
+.story-button {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
+    background: transparent;
+    padding: 10px 20px; /* Optional: Adjust padding for better button appearance */
+    border-color: transparent;
+}
+
+    .story-button:hover {
+        color: #217243;
+    }
+
+
+/*- - - - - */
+
+.add-button-chapter button {
+    width: 250px;
+    height: 80px;
+    color: #a7a7a7;
+    font-size: large;
+    background-color: transparent;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: hidden;
+}
+
+    .add-button-chapter button:hover {
+        background-color: transparent;
+        font-weight: bold;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        transition: color 0.3s ease;
+        color: #217243
+    }
+
+    .add-button-chapter button i {
+        font-size: 30px; /* Adjust the icon size */
+        color: #a7a7a7; /* Icon color */
+    }
+
+    .add-button-chapter button:hover i {
+        color: #86275e; /* Icon color on hover */
+    }
+
+
+/*- - - - - */
+
 
 
 
@@ -284,12 +592,20 @@ body {
 
 /*--- Form ---*/
 
+.chapter-form-container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
 .chapter-form-control {
-    border-radius: 25px; /* Adjust the value to make it more or less rounded */
+    border-radius: 25px;
     padding: 10px 20px; /* Add some padding for better spacing */
-    border: 2px solid #ccc; /* Add a border color */
+    border: 2px solid #ccc;
     transition: border-color 0.2s ease-in-out; /* Add a transition for smooth color change */
-    width: 400px; /* Adjust the width as needed */
+    width: 100%; /* Set the width to 100% of the parent container */
+    max-width: 600px; /* Set a maximum width */
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }
 
     .chapter-form-control:focus {
@@ -299,35 +615,205 @@ body {
         outline: none; /* Remove the default outline */
     }
 
-.chapter-form-floating label {
-    position: absolute;
-    top: 0;
-    left: 420px;
-    padding: 10px 20px;
-    pointer-events: none;
-    transition: all 0.2s ease-out;
-    opacity: 1;
-}
-
-.chapter-form-floating input:focus + label,
-.chapter-form-floating input:not(:placeholder-shown) + label {
-    top: 0px; /* Adjust the position */
-    left: 420px; /* Adjust the position */
-    font-size: 12px; /* Adjust the font size */
-    opacity: 0; /* Make the label disappear */
-}
-
 .chapter-form-floating {
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    width: 100%; /* Ensure the floating container takes full width */
+    max-width: 600px; /* Set a maximum width */
 }
+
+    .chapter-form-floating label {
+        position: absolute;
+        top: 25px;
+        left: 23px; /* Align with input padding */
+        transform: translateY(-50%); /* Center vertically */
+        pointer-events: none;
+        transition: all 0.2s ease-out;
+        opacity: 1;
+    }
+
+    .chapter-form-floating input:focus + label,
+    .chapter-form-floating input:not(:placeholder-shown) + label {
+        left: 5%; /* Keep the left position consistent */
+        font-size: 0px; /* Adjust the font size */
+    }
 
     .chapter-form-floating input {
         padding: 10px 20px; /* Add padding inside the input */
         border-radius: 25px; /* Match the input field border radius */
-        border: 1px solid #ccc; /* Add a border color */
+        border: 2px solid #ccc; /* Add a border color */
         transition: border-color 0.2s ease-in-out; /* Add a transition for smooth color change */
-        width: 400px; /* Adjust the width as needed */
+        width: 100%; /* Ensure the input takes full width of the container */
+        box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
     }
 
+.my-text-danger {
+    display: block;
+    color: #cc0000;
+    font-size: 16px;
+    margin-top: 10px;
+}
 
+
+/*--- Card ---*/
+
+article {
+    --img-scale: 1.001;
+    --title-color: black;
+    --link-icon-translate: -20px;
+    --link-icon-opacity: 0;
+    position: relative;
+    border-radius: 16px;
+    box-shadow: none;
+    /*background: #fff;*/
+    transform-origin: center;
+    transition: all 0.4s ease-in-out;
+    overflow: hidden;
+}
+
+    article a::after {
+        position: absolute;
+        inset-block: 0;
+        inset-inline: 0;
+        cursor: pointer;
+        content: "";
+    }
+
+/* basic article elements styling */
+/*article h2 {
+        margin: 0 0 18px 0;
+        font-family: "Bebas Neue", cursive;
+        font-size: 1.9rem;
+        letter-spacing: 0.06em;
+        color: var(--title-color);
+        transition: color 0.3s ease-out;
+    }*/
+
+figure {
+    margin: 0;
+    padding: 0;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+article img {
+    max-width: 100%;
+    transform-origin: center;
+    transform: scale(var(--img-scale));
+    transition: transform 0.4s ease-in-out;
+}
+
+.article-body {
+    padding: 24px;
+}
+
+article a {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #28666e;
+}
+
+    article a:focus {
+        outline: 1px dotted #28666e;
+    }
+
+    article a .icon {
+        min-width: 24px;
+        width: 24px;
+        height: 24px;
+        margin-left: 5px;
+        transform: translateX(var(--link-icon-translate));
+        opacity: var(--link-icon-opacity);
+        transition: all 0.3s;
+    }
+
+/* using the has() relational pseudo selector to update our custom properties */
+article:has(:hover, :focus) {
+    --img-scale: 1.1;
+    /*--title-color: #28666e;*/
+    --link-icon-translate: 0;
+    --link-icon-opacity: 1;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+
+/************************ 
+Generic layout (demo looks)
+**************************/
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.articles {
+    display: grid;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+@media screen and (max-width: 960px) {
+    article {
+        container: card/inline-size;
+    }
+
+    .article-body p {
+        display: none;
+    }
+}
+
+@container card (min-width: 380px) {
+    .article-wrapper {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 16px;
+    }
+
+    .article-body {
+        padding-left: 0;
+    }
+
+    figure {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+        figure img {
+            height: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+}
+
+.sr-only:not(:focus):not(:active) {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+/*--- Modal chapter text ---*/
+.text-left-custom {
+    text-align: left;
+}
+
+.chapter-p p {
+    text-indent: 3em; /* Adjust the value as needed */
+}
+
+
+/*--- Modal footer button ---*/
+
+.modal-footer-delete {
+    display: flex;
+    justify-content: center;
+}

@@ -1,7 +1,142 @@
-﻿<!-- Story Index -->
-<h1>Story Here !!</h1>
+﻿@model List<Story>
 
 
+@{
+    string? alert = TempData["DeleteSuccess"] as string;
+}
+
+<!-- Alert Start -->
+@if (!string.IsNullOrEmpty(alert))
+{
+    if (alert == "Delete successfully!")
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong><i class="bi bi-check-circle"></i> Successfully deleted !</strong> Your story has been successfully removed.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong><i class="bi bi-x-circle"></i> Failed to delete !</strong> Unable to delete story. An error occurred while processing your request.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+}
 
 
+<!-- Story Index Start -->
 
+<div class="container-xxl py-5">
+
+    @if (Model.Any())
+    {
+        <input asp-for="@Model.First().UserId" hidden />
+
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <p class="section-title bg-white text-center text-primary px-3">All Your Story</p>
+                <h3 class="mb-5">Continue The Story</h3>
+            </div>
+
+            <div class="row gx-4">
+
+                @{
+                    int number = 1;
+                }
+
+                @foreach (Story story in Model)
+                {
+                    <input asp-for="@Model.First().UserId" hidden />
+
+                    <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp pt-4" data-wow-delay="0.1s">
+                        <div class="product-item">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="~/dairyTheme/img/product-1.jpg" alt="">
+
+                                <div class="product-overlay">
+                                    <div class="icon-button-story-container">
+                                        <div class="icon-button-story" data-tooltip="Edit Cover Image">
+                                            <button class="icon-button-story-border-hidden">
+                                                <i class="bi bi-image"></i>
+                                            </button>
+                                        </div>
+
+                                        <div class="icon-button-story" data-tooltip="Delete Story">
+
+                                            <button type="button" class="icon-button-story-border-hidden" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                <i class="bi bi-trash3-fill"></i>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <form method="get" asp-action="UpdateStory">
+                                <input name="id" value="@story.Id" hidden />
+                                <div class="text-center p-3">
+                                    <button type="submit" class="story-button h5">@story.Title @number</button>
+                                    <div>
+                                        @story.Chapters.Count Chapter
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    number++;
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Story</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <div class="icon-delete-story-container icon-delete-story mt-2">
+                                        <i class="bi bi-trash3"></i>
+                                    </div>
+                                    <div class="text-center mt-2" style="font-size:18px">
+                                        This story and all chapters will be permanently removed. Restoration will not be possible.
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer modal-footer-delete mt-3">
+                                    <form method="post" asp-action="DeleteAllChapter">
+
+                                        <input name="id" value="@story.Id" hidden />
+                                        <button type="button" class="close-delete-button save-box" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="delete-button save-box">Delete</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal End-->
+                }
+
+            </div>
+
+        </div>
+
+    }
+    else
+    {
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <p class="section-title bg-white text-center text-primary px-3">All Your Story</p>
+                <h3 class="mb-5">No Story</h3>
+            </div>
+        </div>
+    }
+
+</div>
+<!-- Story Index End -->

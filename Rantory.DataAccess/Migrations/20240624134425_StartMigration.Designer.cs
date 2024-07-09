@@ -12,8 +12,8 @@ using Rantory.DataAccess;
 namespace Rantory.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240620101453_EditChapterNameType")]
-    partial class EditChapterNameType
+    [Migration("20240624134425_StartMigration")]
+    partial class StartMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -240,12 +240,24 @@ namespace Rantory.DataAccess.Migrations
 
                     b.Property<string>("ChapterName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("StoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("StoryId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Chapters");
                 });
@@ -258,6 +270,9 @@ namespace Rantory.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -266,6 +281,8 @@ namespace Rantory.DataAccess.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("UserId");
 
@@ -323,12 +340,35 @@ namespace Rantory.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Rantory.Models.Chapter", b =>
+                {
+                    b.HasOne("Rantory.Models.Story", "Story")
+                        .WithMany("Chapters")
+                        .HasForeignKey("StoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Rantory.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Story");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Rantory.Models.Story", b =>
                 {
-                    b.HasOne("Rantory.Models.ApplicationUser", "User")
+                    b.HasOne("Rantory.Models.ApplicationUser", null)
                         .WithMany("Stories")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("Rantory.Models.ApplicationUser", "User")
+                        .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -337,6 +377,11 @@ namespace Rantory.DataAccess.Migrations
             modelBuilder.Entity("Rantory.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Stories");
+                });
+
+            modelBuilder.Entity("Rantory.Models.Story", b =>
+                {
+                    b.Navigation("Chapters");
                 });
 #pragma warning restore 612, 618
         }

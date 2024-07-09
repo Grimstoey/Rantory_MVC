@@ -12,8 +12,8 @@ using Rantory.DataAccess;
 namespace Rantory.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240621144527_EditStoryProp")]
-    partial class EditStoryProp
+    [Migration("20240707084403_AddChapterNameSourceModel")]
+    partial class AddChapterNameSourceModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -240,13 +240,12 @@ namespace Rantory.DataAccess.Migrations
 
                     b.Property<string>("ChapterName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StoryId")
+                    b.Property<int>("StoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -260,6 +259,33 @@ namespace Rantory.DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Chapters");
+                });
+
+            modelBuilder.Entity("Rantory.Models.ChapterNameSource", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChapterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChapterId");
+
+                    b.HasIndex("StoryId");
+
+                    b.ToTable("ChapterNameSources");
                 });
 
             modelBuilder.Entity("Rantory.Models.Story", b =>
@@ -337,17 +363,40 @@ namespace Rantory.DataAccess.Migrations
 
             modelBuilder.Entity("Rantory.Models.Chapter", b =>
                 {
-                    b.HasOne("Rantory.Models.Story", null)
+                    b.HasOne("Rantory.Models.Story", "Story")
                         .WithMany("Chapters")
-                        .HasForeignKey("StoryId");
+                        .HasForeignKey("StoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Rantory.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Story");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Rantory.Models.ChapterNameSource", b =>
+                {
+                    b.HasOne("Rantory.Models.Chapter", "Chapter")
+                        .WithMany()
+                        .HasForeignKey("ChapterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.HasOne("Rantory.Models.Story", "Story")
+                        .WithMany()
+                        .HasForeignKey("StoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chapter");
+
+                    b.Navigation("Story");
                 });
 
             modelBuilder.Entity("Rantory.Models.Story", b =>
@@ -355,7 +404,7 @@ namespace Rantory.DataAccess.Migrations
                     b.HasOne("Rantory.Models.ApplicationUser", "User")
                         .WithMany("Stories")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("User");
