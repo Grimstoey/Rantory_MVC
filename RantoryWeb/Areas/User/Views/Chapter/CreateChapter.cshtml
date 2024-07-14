@@ -1,27 +1,33 @@
-﻿@model Chapter
-
+﻿@model ChapterStoryVM
 
 <div class="team-item rounded p-4">
 
     <form method="post" action="CreateChapter">
 
-        <input asp-for="UserId" hidden />
+        <input asp-for="@Model.Story.UserId" hidden />
+        <input asp-for="@Model.Story.Id" hidden />
+        <input asp-for="@Model.Chapter.UserId" hidden />
+
+
         <img class="img-fluid rounded mb-4" src="img/team-1.jpg" alt="">
         <div class="pt-3">
             <p class="my-section-title bg-white text-center px-3">Chapter 1</p>
             @* <h4>Chapter Name</h4> *@
         </div>
 
-        <div class="mt-3 chapter-form-floating">
+        <div class="chapter-form-container">
+            <div class="mt-3 chapter-form-floating">
 
-            <input asp-for="ChapterName" type="text" class="chapter-form-control" id="name" placeholder="">
-            <label asp-for="ChapterName"></label>
-            <span asp-validation-for="ChapterName" class="my-text-danger"></span>
+                <input asp-for="@Model.Chapter.ChapterName" type="text" class="chapter-form-control" id="name" placeholder="">
+                <label asp-for="@Model.Chapter.ChapterName"></label>
+                <span asp-validation-for="@Model.Chapter.ChapterName" class="my-text-danger"></span>
 
+            </div>
         </div>
 
-        <div class="mt-5">
-            <textarea asp-for="Content" id="mytextarea"></textarea>
+
+        <div>
+            <textarea asp-for="@Model.Chapter.Content" id="mytextarea"></textarea>
         </div>
 
         <div class="button-container-end mt-5">
@@ -35,4 +41,3 @@
 
     </form>
 </div>
-

@@ -2,13 +2,14 @@
 
 
 @{
-    string? alert = TempData["DeleteSuccess"] as string;
+    string? deleteAlert = TempData["DeleteSuccess"] as string;
+    string? addAlert = TempData["AddNewStory"] as string;
 }
 
 <!-- Alert Start -->
-@if (!string.IsNullOrEmpty(alert))
+@if (!string.IsNullOrEmpty(deleteAlert))
 {
-    if (alert == "Delete successfully!")
+    if (deleteAlert == "Delete successfully!")
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong><i class="bi bi-check-circle"></i> Successfully deleted !</strong> Your story has been successfully removed.
@@ -19,6 +20,24 @@
     {
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong><i class="bi bi-x-circle"></i> Failed to delete !</strong> Unable to delete story. An error occurred while processing your request.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+}
+
+@if (!string.IsNullOrEmpty(addAlert))
+{
+    if (addAlert == "Create new story successfully!")
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong><i class="bi bi-check-circle"></i> Success !</strong> Your story has been successfully created.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong><i class="bi bi-x-circle"></i> Oops !</strong> Something went wrong. Please try creating your story again.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
@@ -35,10 +54,64 @@
 
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="section-title bg-white text-center text-primary px-3">All Your Story</p>
-                <h3 class="mb-5">Continue The Story</h3>
+                <p class="my-section-title bg-white text-center px-3">All Your Story</p>
+                <h5>Unlock</h5>
+                <h3 class="mb-3">Your Creativity With Every Click !</h3>
             </div>
 
+            <div class="row">
+                <div class="wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="pt-2 pb-4 mb-3">
+                        <div class="d-flex justify-content-center">
+
+                            <div class="add-button-chapter">
+                                <button data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="bi bi-plus-circle-dotted"></i>
+                                    <span class="p-3">New Story</span>
+                                </button>
+                            </div>
+
+                            <!-- Add Modal -->
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Random Story</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="icon-delete-story-container icon-random-story mt-2">
+                                                <i class="bi bi-dice-5"></i>
+                                            </div>
+                                            <div class="text-center mt-2" style="font-size:18px">
+                                                We'll generate a random chapter title for you.<br />
+                                                Let your imagination soar <br />
+                                                with our randomly generated titles!<br />
+                                                You can name your story after clicking<br />
+                                                the 'Finish Story' button.
+                                            </div>
+
+                                        </div>
+
+                                        <form method="get" asp-action="CreateStory">
+                                            <div class="modal-footer modal-footer-delete mt-3">
+                                                <button type="button" class="close-random-button save-box" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="random-button save-box">Random</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal End -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Show all Story are not finish Start -->
             <div class="row gx-4">
 
                 @{
@@ -47,83 +120,97 @@
 
                 @foreach (Story story in Model)
                 {
-                    <input asp-for="@Model.First().UserId" hidden />
+                    if (story.FinishStatus == false)
+                    {
+                        <input asp-for="@Model.First().UserId" hidden />
 
-                    <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp pt-4" data-wow-delay="0.1s">
-                        <div class="product-item">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="~/dairyTheme/img/product-1.jpg" alt="">
+                        <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp pt-2" data-wow-delay="0.1s">
+                            <div class="product-item">
+                                <div class="position-relative">
+                                    <img class="img-fluid" src="~/dairyTheme/img/product-1.jpg" alt="">
 
-                                <div class="product-overlay">
-                                    <div class="icon-button-story-container">
-                                        <div class="icon-button-story" data-tooltip="Edit Cover Image">
-                                            <button class="icon-button-story-border-hidden">
-                                                <i class="bi bi-image"></i>
-                                            </button>
+                                    <div class="product-overlay">
+                                        <div class="icon-button-story-container">
+                                            <div class="icon-button-story" data-tooltip="Edit Cover Image">
+                                                <button class="icon-button-story-border-hidden">
+                                                    <i class="bi bi-image"></i>
+                                                </button>
+                                            </div>
+
+                                            <div class="icon-button-story" data-tooltip="Delete Story">
+                                                <button type="button" class="icon-button-story-border-hidden" data-bs-toggle="modal" data-bs-target="#deleteStoryModal-@story.Id">
+                                                    <i class="bi bi-trash3-fill"></i>
+                                                </button>
+                                            </div>
                                         </div>
-
-                                        <div class="icon-button-story" data-tooltip="Delete Story">
-
-                                            <button type="button" class="icon-button-story-border-hidden" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                                <i class="bi bi-trash3-fill"></i>
-                                            </button>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <form method="get" asp-action="UpdateStory">
-                                <input name="id" value="@story.Id" hidden />
-                                <div class="text-center p-3">
-                                    <button type="submit" class="story-button h5">@story.Title @number</button>
-                                    <div>
-                                        @story.Chapters.Count Chapter
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    number++;
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Story</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-
-                                <div class="modal-body">
-
-                                    <div class="icon-delete-story-container icon-delete-story mt-2">
-                                        <i class="bi bi-trash3"></i>
-                                    </div>
-                                    <div class="text-center mt-2" style="font-size:18px">
-                                        This story and all chapters will be permanently removed. Restoration will not be possible.
                                     </div>
 
                                 </div>
 
-                                <div class="modal-footer modal-footer-delete mt-3">
-                                    <form method="post" asp-action="DeleteAllChapter">
-
+                                <div class="text-center mt-4">
+                                    <form method="get" asp-area="User" asp-controller="Chapter" asp-action="Index">
                                         <input name="id" value="@story.Id" hidden />
-                                        <button type="button" class="close-delete-button save-box" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="delete-button save-box">Delete</button>
+                                        <button type="submit" class="story-button h6">@story.Title @number</button>
                                     </form>
 
+                                        @{
+                                            string chapter = "";
+
+                                            chapter = story.Chapters.Count > 1 ? "Chapters" : "Chapter";
+                                        }
+
+                                        <div>
+                                            @story.Chapters.Count @chapter
+                                        </div>
+
+                                    <form method="get" asp-area="User" asp-controller="Story" asp-action="FinishStory">
+                                        <div class="modal-footer-delete mt-4 mb-4">
+                                            <input name="id" value="@story.Id" hidden />
+                                            <button class="save-button save-box" style="font-size:medium" type="submit">Finish Story</button>
+                                        </div>
+                                    </form>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+
+                        number++;
+
+                        <!-- Delete Modal -->
+                        <div class="modal fade" id="deleteStoryModal-@story.Id" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteStoryModalLabel-@story.Id" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="deleteStoryModalLabel-@story.Id">Delete Story</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="icon-delete-story-container icon-delete-story mt-2">
+                                            <i class="bi bi-trash3"></i>
+                                        </div>
+                                        <div class="text-center mt-2" style="font-size:18px">
+                                            This story and all chapters will be permanently removed. Restoration will not be possible.
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer modal-footer-delete mt-3">
+                                        <form method="post" asp-action="DeleteAllChapter">
+                                            <input name="id" value="@story.Id" hidden />
+                                            <button type="button" class="close-delete-button save-box" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="delete-button save-box">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Modal End-->
+                        <!-- Modal End -->
+                    }
+
                 }
 
             </div>
+
+            <!-- Show Story End -->
 
         </div>
 
@@ -132,8 +219,61 @@
     {
         <div class="container">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="section-title bg-white text-center text-primary px-3">All Your Story</p>
-                <h3 class="mb-5">No Story</h3>
+                <p class="my-section-title bg-white text-center px-3">All Your Story</p>
+                <h5>Unlock</h5>
+                <h3 class="mb-3">Your Creativity With Every Click !</h3>
+            </div>
+
+            <div class="row">
+                <div class="wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="pt-2 pb-4 mb-3">
+                        <div class="d-flex justify-content-center">
+
+                            <div class="add-button-chapter">
+                                <button data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="bi bi-plus-circle-dotted"></i>
+                                    <span class="p-3">New Story</span>
+                                </button>
+                            </div>
+
+                            <!-- Add Modal -->
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Random Story</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="icon-delete-story-container icon-random-story mt-2">
+                                                <i class="bi bi-dice-5"></i>
+                                            </div>
+                                            <div class="text-center mt-2" style="font-size:18px">
+                                                We'll generate a random chapter title for you.<br />
+                                                Let your imagination soar <br />
+                                                with our randomly generated titles!<br />
+                                                You can name your story after clicking<br />
+                                                the 'Finish Story' button.
+                                            </div>
+
+                                        </div>
+
+                                        <form method="get" asp-action="CreateStory">
+                                            <div class="modal-footer modal-footer-delete mt-3">
+                                                <button type="button" class="close-random-button save-box" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="random-button save-box">Random</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal End -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     }

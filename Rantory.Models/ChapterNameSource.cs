@@ -17,11 +17,11 @@ namespace Rantory.Models
         [Display(Name = "New chapter name")]
         public string Name { get; set; } = "";
 
-        public int StoryId { get; set; }
+        public int? StoryId { get; set; }
         [ForeignKey("StoryId")]
         public Story? Story { get; set; }
 
-        public int ChapterId { get; set; }
+        public int? ChapterId { get; set; }
         [ForeignKey("ChapterId")]
         public Chapter? Chapter { get; set; }
     }

@@ -47,7 +47,39 @@ namespace RantoryWeb.Areas.Admin.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateChapterName(ChapterNameSource chapterName)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(chapterName);
+            }
+            else
+            {
+                List<string> allChapterName = _dbContext.ChapterNameSources.Select(cn => cn.Name.ToLower()).ToList();
 
+                if(allChapterName.Contains(chapterName.Name.ToLower()))
+                {
+                    TempData["CreationFailed"] = "Chapter name creation failed.";
+
+                    return View(chapterName);
+                }
+                else
+                {
+                    await _dbContext.ChapterNameSources.AddAsync(chapterName);
+                    await _dbContext.SaveChangesAsync();
+
+                    TempData["SuccessAddChapterName"] = "Chapter name created successfully.";
+                    TempData["NewChapterName"] = chapterName.Name.ToString();
+
+                    ModelState.Clear();
+
+
+                    return RedirectToAction(nameof(CreateChapterName));
+                }                
+
+            }
+        }
 
     }
 }

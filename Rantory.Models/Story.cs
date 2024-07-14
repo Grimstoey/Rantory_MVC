@@ -21,5 +21,7 @@ namespace Rantory.Models
 
         public ICollection<Chapter> Chapters { get; set; } = new List<Chapter>();
 
+        public bool FinishStatus { get; set; } = false;
+
     }
 }

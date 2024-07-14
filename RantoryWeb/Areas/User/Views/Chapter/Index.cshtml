@@ -1,63 +1,196 @@
-﻿@* @model IEnumerable<UserChapterVM> *@
+﻿@model Story
 
 
-<!-- Chapter Index Start -->
+@{
+    string? alert = TempData["ChapterSuccess"] as string;
+    string? chapterName = TempData["ChapterName"] as string;
+}
 
-@* <div class="container-xxl py-5">
-
-    <input asp-for="@Model.First().UserApp.Id" hidden />
-
-    @if(!Model.First().Chapters.Any())
+<!-- Alert Start -->
+@if (!string.IsNullOrEmpty(alert))
+{
+    if (alert == "Chapter updated successfully!")
     {
-        <div class="container">
-            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="section-title bg-white text-center text-primary px-3">All Your Chapter</p>
-                <h3 class="mb-5">No Story</h3>
-            </div>           
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong><i class="bi bi-check-circle"></i> @chapterName saved !</strong> Keep building your world.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
     else
     {
-        <div class="container">
-            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="section-title bg-white text-center text-primary px-3">All Your Chapter</p>
-                <h3 class="mb-5">Continue The Story</h3>
-            </div>
-
-            <div class="row gx-4">               
-
-                @foreach (UserChapterVM userChapterVM in Model)
-                {
-                    <input asp-for="@Model.First().UserApp.Id" hidden />
-
-                    <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="product-item">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="~/dairyTheme/img/product-1.jpg" alt="">
-
-                                <div class="product-overlay">
-                                    <div class="icon-button-container">
-                                        <div class="icon-button" data-tooltip="Update Cover Image">
-                                            <a class="icon-button" href=""><i class="bi bi-image"></i></a>
-                                        </div>
-                                        <div class="icon-button" data-tooltip="Delete All Chapter">
-                                            <a class="icon-button" href=""><i class="bi bi-trash3-fill"></i></a>
-                                        </div>                                                                             
-                                    </div>                                   
-                                </div>
-
-                            </div>
-                            <div class="text-center p-4">
-                                <a asp-area="User" asp-controller="Chapter" asp-action="UpdateChapter" class="d-block h5">Untitle 1</a>
-                                <span class="text-primary me-1">0 chapters</span>
-                            </div>
-                        </div>
-                    </div>
-                }
-
-            </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong><i class="bi bi-x-circle"></i> Failed to save !</strong> Something went wrong. Please check and save again.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
-    
-</div>
-<!-- Chapter Index End --> *@
+}
+
+<!-- Index Chapter Start -->
+
+@if (Model != null)
+{
+    <div class="team-item rounded p-4">
+        <div class="container-xxl py-5">
+
+            <div class="pt-2">
+                <p class="my-section-title bg-white text-center px-3">Create</p>
+                <h5>Something Amazing</h5>
+                <h3>Write Your Next Chapter</h3>
+            </div>
+
+            <div class="row">
+                <div class="wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="pt-2 pb-4 mb-4">
+                        <div class="d-flex justify-content-center">
+
+
+                            <div class="add-button-chapter">
+                                <button data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="bi bi-plus-circle-dotted"></i>
+                                    <span class="p-3">Add Chapter</span>
+                                </button>
+                            </div>
+
+                            <!-- Add Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Random Story</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="icon-delete-story-container icon-random-story mt-2">
+                                                <i class="bi bi-dice-5"></i>
+                                            </div>
+                                            <div class="text-center mt-2" style="font-size:18px">
+                                                We'll generate a random chapter title for you.<br />
+                                                Let your imagination soar <br />
+                                                with our randomly generated titles!
+                                            </div>
+
+                                        </div>
+
+                                        <form method="get" asp-action="CreateChapter">
+                                            <input asp-for="@Model.Id" hidden />
+
+                                            <div class="modal-footer modal-footer-delete mt-3">
+                                                <button type="button" class="close-random-button save-box" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="random-button save-box">Random</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal End -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chapter Start -->
+            <section class="articles">
+                @{
+                    int number = 1;
+                }
+
+                @foreach (Chapter chapter in Model.Chapters)
+                {
+                    <input asp-for="@Model.UserId" hidden />
+                    <input asp-for="@chapter.Id" hidden />
+                    <input asp-for="@Model.Id" hidden />
+
+                    if (chapter.UserId == Model.UserId)
+                    {
+                        <article>
+                            <div class="article-wrapper">
+                                <figure>
+                                    <img src="/dairyTheme/img/banner-1.jpg" alt="" />
+                                </figure>
+                                <div class="article-body">
+                                    <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                                        <p class="my-section-title bg-white text-center px-3">Chapter @number</p>
+                                        <h4 class="text-dark mb-3">@chapter.ChapterName</h4>
+                                    </div>
+                                    <div class="text-left-custom chapter-p">
+                                        @if (chapter.Content is not null && chapter.Content.Length > 200)
+                                        {
+                                            @Html.Raw(chapter.Content.Substring(0, 200))
+                                            <span> . . . .</span>
+                                        }
+                                        else if (chapter.Content is not null && chapter.Content.Length < 200)
+                                        {
+                                            @Html.Raw(chapter.Content)
+                                        }
+                                        else
+                                        {
+                                            <p>- - - You have not added any content to this chapter. - - -</p>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Icon Button Start -->
+                            <div class="icon-button-chapter-container mb-5 justify-content-center">
+                                <div class="icon-button-chapter-container">
+                                    <div class="icon-button-chapter" data-tooltip="Edit Cover Image">
+                                        <a href=""><i class="bi bi-image"></i></a>
+                                    </div>
+                                    <div class="icon-button-chapter" data-tooltip="Update Chapter">
+                                        <a href=""><i class="bi bi-pencil-square"></i></a>
+                                    </div>
+                                    <div class="icon-button-chapter" data-tooltip="Read More">
+                                        <a data-bs-toggle="modal" data-bs-target="#exampleModal-@number"><i class="bi bi-chevron-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Icon Button End -->
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal-@number" tabindex="-1" aria-labelledby="exampleModalLabel-@number" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel-@number">Chapter @number : @chapter.ChapterName</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-left-custom chapter-p">
+                                            @Html.Raw(chapter.Content)
+                                        </div>
+                                        <div class="modal-footer">
+
+                                            <form method="get" asp-area="User" asp-controller="Chapter" asp-action="EditChapter">
+
+                                                <input name="chapterId" value="@chapter.Id" hidden />
+                                                <input name="storyId" value="@Model.Id" hidden />
+
+                                                <button type="button" class="close-button save-box" data-bs-dismiss="modal">Close</button>
+
+                                                <button type="submit" class="update-button save-box">
+                                                    Update
+                                                </button>
+
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        number++;
+                    }
+                }
+            </section>
+        </div>
+    </div>
+
+}
+else
+{
+    <div class="container-xxl py-5">
+        <h3>No Chapter</h3>
+    </div>
+}
+<!-- Index Chapter End -->

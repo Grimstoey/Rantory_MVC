@@ -1,6 +1,12 @@
 ﻿@model ChapterNameSource
 
 
+@{
+    string? alert = TempData["SuccessAddChapterName"] as string;
+    string? alertFailed = TempData["CreationFailed"] as string;
+    string? newChapterName = TempData["NewChapterName"] as string;
+}
+
 
 <!-- Chapter Name Start -->
 <div class="container-xxl py-5">
@@ -43,7 +49,35 @@
             </div>
             <div>
                 <h5>Add New Chapter Name</h5>
-                <form>
+
+                <!-- Alert Start -->
+                @if (!string.IsNullOrEmpty(alert) || !string.IsNullOrEmpty(alertFailed))
+                {
+                    if (alert == "Chapter name created successfully.")
+                    {
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong><i class="bi bi-check-circle"></i> Successfully !</strong> " @newChapterName " has been successfully created !
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    else if (alertFailed == "Chapter name creation failed.")
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong><i class="bi bi-x-circle"></i> The chapter name you provided already exists !</strong> Please select another name.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong><i class="bi bi-x-circle"></i> Failed to add the chapter name !</strong> Unable to added. An error occurred while processing your request.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                }
+
+                <form method="post" action="CreateChapterName">
+
                     <div class="chapter-form-container row g-2">                      
                         <div class="chapter-form-floating col-auto">                           
                             <input asp-for="Name" type="text" class="chapter-form-control" placeholder="">
@@ -54,9 +88,7 @@
                             <button class="save-button save-box" style="width:120px; height:47px;" href=""><i class="bi bi-plus-circle" style="font-size:large"></i> Add</button>
                         </div>
                     </div>
-
-                    
-                    
+                   
                 </form>
                 
             </div>

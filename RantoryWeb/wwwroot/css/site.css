@@ -328,6 +328,63 @@ body {
 
 /*- - - - - */
 
+.random-button {
+    color: #217243;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: medium;
+    cursor: pointer;
+    outline: none;
+    background: transparent;
+    border: 2px solid #979797; /* Add this line to specify the border */
+    border-radius: 30px; /* Optional: Add this line if you want rounded corners */
+    padding: 8px 10px; /* Optional: Adjust padding for better button appearance */
+    width: 120px;
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+    border-left: 4px solid;
+    border-right: 4px solid;
+    border-color: #217243;
+}
+
+    .random-button:hover {
+        font-weight: bold;
+        color: #fff9cc;
+        border-color: #217243; /* Optional: Change border color on hover */
+        background-color: #217243;
+    }
+
+/*- - - - - */
+
+.close-random-button {
+    color: #86275e;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: medium;
+    cursor: pointer;
+    outline: none;
+    background: transparent;
+    border: 2px solid #979797; /* Add this line to specify the border */
+    border-radius: 30px; /* Optional: Add this line if you want rounded corners */
+    padding: 8px 10px; /* Optional: Adjust padding for better button appearance */
+    width: 120px;
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+    border-left: 4px solid;
+    border-right: 4px solid;
+    border-color: #979797;
+}
+
+    .close-random-button:hover {
+        font-weight: bold;
+        color: #fff9cc;
+        border-color: #86275e; /* Optional: Change border color on hover */
+        background-color: #86275e;
+    }
+
+/*- - - - - */
+
+
 .close-delete-button {
     color: #217243;
     text-decoration: none;
@@ -434,6 +491,16 @@ body {
 
 
 /*- - - - -*/
+
+.icon-random-story i {
+    font-size: 65px; /* Adjust the icon size */
+    color: #217243; /* icon color */
+    border: 0px hidden none;
+}
+
+
+/*- - - - -*/
+
 .icon-button-chapter-container {
     display: flex;
     gap: 15px; /* Adjust the space between buttons */
@@ -499,7 +566,7 @@ body {
     cursor: pointer;
     outline: none;
     background: transparent;
-    padding: 10px 20px; /* Optional: Adjust padding for better button appearance */
+    /*padding: 10px 20px;*/ /* Optional: Adjust padding for better button appearance */
     border-color: transparent;
 }
 
