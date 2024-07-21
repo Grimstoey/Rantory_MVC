@@ -1,0 +1,192 @@
+﻿@model List<Story>
+
+
+@{
+    string? deleteAlert = TempData["DeleteSuccess"] as string;
+}
+
+
+<!-- Alert Start -->
+@if (!string.IsNullOrEmpty(deleteAlert))
+{
+    if (deleteAlert == "Delete successfully!")
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong><i class="bi bi-check-circle"></i> Successfully deleted !</strong> Your story has been successfully removed.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong><i class="bi bi-x-circle"></i> Failed to delete !</strong> Unable to delete story. An error occurred while processing your request.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+}
+
+
+<!-- Show Completed Stories Start -->
+@if (Model.Any())
+{
+    <input asp-for="@Model.First().UserId" hidden />
+
+    <div class="container mt-5">
+        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <p class="my-section-title bg-white text-center px-3">All Your Complete Story</p>
+            <h3 class="mb-3">Complete Story</h3>
+        </div>
+    </div>
+
+    <!-- Show All Story Are Complete Start -->
+    <div class="row gx-4">
+
+        @foreach (Story story in Model)
+        {
+            if (story.FinishStatus == true)
+            {
+                <input asp-for="@Model.First().UserId" hidden />
+                <input asp-for="@story.Id" hidden />
+
+                <!-- Cover Story Start -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp mt-4" data-wow-delay="0.1s">
+                    <div class="team-item rounded p-4">
+                        <img class="img-fluid rounded mb-4" src="/dairyTheme/img/gallery-5.jpg" alt="">
+                        <form method="get" asp-area="User" asp-controller="Story" asp-action="ReadStory">
+                            <input name="id" value="@story.Id" hidden />
+                            <button type="submit" class="story-button h6">@story.Title</button>
+                        </form>
+
+                        <a href="">@story.User.UserName</a>
+
+                        <div class="mt-4 text-left-custom chapter-p">
+                            <p>
+                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur,
+                            </p>
+                        </div>
+                        
+
+                        <!-- Icon Button Start -->
+                        <div class="icon-button-chapter-container mb-4 mt-4 justify-content-center">
+                            <div class="icon-button-chapter-container">
+                                <div class="icon-button-chapter" data-tooltip="Edit Cover Image">
+                                    <a href=""><i class="bi bi-image"></i></a>
+                                </div>
+                                <div class="icon-button-chapter" data-tooltip="Delete Story">
+                                    <button type="button" class="icon-button-story-border-hidden" data-bs-toggle="modal" data-bs-target="#deleteStoryModal-@story.Id">
+                                        <i class="bi bi-trash3-fill"></i>
+                                    </button>
+                                </div>
+                                <div class="icon-button-chapter" data-tooltip="Read More">
+                                    <a asp-area="User" asp-controller="Story" asp-action="ReadStory" asp-route-id="@story.Id"><i class="bi bi-chevron-double-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Icon Button End -->
+
+                    </div>
+                </div>
+
+
+
+                <!-- Cover Story End -->
+                @*  <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp pt-2" data-wow-delay="0.1s">
+    <div class="product-item">
+    <div class="position-relative">
+    <img class="img-fluid" src="~/dairyTheme/img/product-1.jpg" alt="">
+
+    <div class="product-overlay">
+    <div class="icon-button-story-container">
+    <div class="icon-button-story" data-tooltip="Edit Cover Image">
+    <button class="icon-button-story-border-hidden">
+    <i class="bi bi-image"></i>
+    </button>
+    </div>
+
+    <div class="icon-button-story" data-tooltip="Delete Story">
+    <button type="button" class="icon-button-story-border-hidden" data-bs-toggle="modal" data-bs-target="#deleteStoryModal-@story.Id">
+    <i class="bi bi-trash3-fill"></i>
+    </button>
+    </div>
+    </div>
+    </div>
+
+    </div>
+
+
+    <div class="text-center mt-4">
+    <form method="get" asp-area="User" asp-controller="Chapter" asp-action="Index">
+    <input name="id" value="@story.Id" hidden />
+    <button type="submit" class="story-button h6">@story.Title</button>
+    </form>
+
+    @{
+    string chapter = "";
+
+    chapter = story.Chapters.Count > 1 ? "Chapters" : "Chapter";
+    }
+
+    <div>
+    @story.Chapters.Count @chapter
+    </div>
+
+    <form method="get" asp-area="User" asp-controller="Story" asp-action="FinishStory">
+    <div class="modal-footer-delete mt-4 mb-4">
+    <input name="id" value="@story.Id" hidden />
+    <button class="save-button save-box" style="font-size:medium" type="submit">Public</button>
+    </div>
+    </form>
+
+    </div>
+
+    </div>
+    </div> *@
+
+                <!-- Delete Modal -->
+                <div class="modal fade" id="deleteStoryModal-@story.Id" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteStoryModalLabel-@story.Id" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="deleteStoryModalLabel-@story.Id">Delete Story</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="icon-delete-story-container icon-delete-story mt-2">
+                                    <i class="bi bi-trash3"></i>
+                                </div>
+                                <div class="text-center mt-2" style="font-size:18px">
+                                    This story and all chapters will be permanently removed. Restoration will not be possible.
+                                </div>
+                            </div>
+                            <div class="modal-footer modal-footer-delete mt-3">
+                                <form method="post" asp-action="DeleteStory">
+                                    <input name="id" value="@story.Id" hidden />
+                                    <button type="button" class="close-delete-button save-box" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="delete-button save-box">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal End -->
+            }
+
+        }
+
+    </div>
+
+    <!-- Show Story End -->
+}
+else
+{
+    <div class="container">
+        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <p class="my-section-title bg-white text-center px-3">All Your Complete Story</p>
+            <h3 class="mb-3">Complete Story</h3>
+        </div>
+
+        <h4>No Complete Story</h4>
+    </div>
+}
+
+<!-- Show Completed Stories End -->

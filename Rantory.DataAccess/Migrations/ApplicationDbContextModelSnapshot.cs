@@ -255,7 +255,7 @@ namespace Rantory.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Chapters");
+                    b.ToTable("Chapters", (string)null);
                 });
 
             modelBuilder.Entity("Rantory.Models.ChapterNameSource", b =>
@@ -282,7 +282,7 @@ namespace Rantory.DataAccess.Migrations
 
                     b.HasIndex("StoryId");
 
-                    b.ToTable("ChapterNameSources");
+                    b.ToTable("ChapterNameSources", (string)null);
                 });
 
             modelBuilder.Entity("Rantory.Models.Story", b =>
@@ -307,7 +307,7 @@ namespace Rantory.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Stories");
+                    b.ToTable("Stories", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -1,0 +1,74 @@
+﻿@model Story
+
+
+
+
+
+<!-- Read Story Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <p class="my-section-title bg-white text-center px-3">Read Story</p>
+            <h2 class="">@Model.Title</h2>
+            <h5>
+                by<br />
+            </h5>
+            <h6 class="mb-5">
+                <a href="">@Model.User.UserName</a>
+            </h6>
+        </div>
+
+        @if (Model.Chapters.Any())
+        {
+            <div class="row gy-5 gx-4">
+
+                @{
+                    int number = 1;
+                }
+
+                @foreach (Chapter chapter in Model.Chapters)
+                {
+                    <div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item d-flex h-100">
+                            <div class="service-img">
+                                <img class="img-fluid" src="/dairyTheme/img/service-3.jpg" alt="">
+                            </div>
+                            <div class="service-text p-5 pt-0">
+                                <div class="service-icon">
+                                    <img class="img-fluid rounded-circle" src="/dairyTheme/img/service-3.jpg" alt="">
+                                </div>
+                                <p style="font-size:medium; font-weight:bolder">Chapter @number</p>
+                                <h5 class="mb-3">
+                                    @chapter.ChapterName
+                                </h5>
+                                <div class="text-left-custom mb-4">
+                                    <p>
+                                        @if (chapter.Content is not null && chapter.Content.Length > 200)
+                                        {
+                                            @Html.Raw(chapter.Content.Substring(0, 200))
+                                            <span> . . . .</span>
+                                        }
+                                        else if (chapter.Content is not null && chapter.Content.Length < 200)
+                                        {
+                                            @Html.Raw(chapter.Content)
+                                        }
+                                    </p>
+                                </div>
+
+                                <div >
+                                    <form method="get" asp-area="User" asp-controller="Story" asp-action="ReadContent" asp-route-id="@chapter.Id">
+                                        <button class="icon-button-content mt-5" data-tooltip="Read More" type="submit"><i class="bi bi-chevron-double-right"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    number++;
+                }
+            </div>
+        }
+
+    </div>
+</div>
+<!-- Read Story End -->

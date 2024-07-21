@@ -405,7 +405,7 @@ body {
 }
 
     .close-delete-button:hover {
-        font-weight:bold;
+        font-weight: bold;
         color: #fff9cc;
         background-color: #217243;
         border-color: #217243; /* Optional: Change border color on hover */
@@ -558,6 +558,61 @@ body {
     }
 
 /*- - - - - */
+
+.icon-button-content {
+    position: relative; /* Required for positioning the tooltip */
+    width: 45px;
+    height: 45px;
+    background-color: #86275e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #86275e;
+}
+
+    .icon-button-content:hover {
+        background-color: #86275e;
+        border: 0px solid #86275e;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        transition: color 0.3s ease;
+    }
+
+    .icon-button-content i {
+        font-size: 20px; /* Adjust the icon size */
+        color: #fff9cc; /* Icon color */
+    }
+
+    .icon-button-content:hover i {
+        color: #fff9cc; /* Icon color on hover */
+        font-weight: bold;
+    }
+
+    .icon-button-content::after {
+        content: attr(data-tooltip); /* Use data-tooltip attribute for text */
+        position: absolute;
+        bottom: 110%; /* Position above the button */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #86275e;
+        color: #fff9cc;
+        padding: 5px 10px;
+        border-radius: 20px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        /*font-weight: bold;*/
+    }
+
+    .icon-button-content:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+/*- - - - - */
+
 
 .story-button {
     text-decoration: none;
@@ -867,6 +922,9 @@ Generic layout (demo looks)
     white-space: nowrap;
     width: 1px;
 }
+
+/*- - - - - */
+
 
 /*--- Modal chapter text ---*/
 .text-left-custom {

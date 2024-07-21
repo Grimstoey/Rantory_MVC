@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Rantory.DataAccess;
@@ -19,23 +20,24 @@ namespace RantoryWeb.Areas.User.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index(Story? story)
+        public async Task<IActionResult> Index(int id)
         {
-
             //Show all chapter in story
 
             var user = await _userManager.GetUserAsync(User);
+           
 
-            if (user is not null && story is not null)
+            if (user is not null)
             {
-                var storyFromDb = _dbContext.Stories.Where(s => s.UserId == user.Id && s.Id == story.Id).Include(story => story.Chapters).FirstOrDefault();
+                var storyFromDb = await _dbContext.Stories.Include(story => story.Chapters)
+                                                          .FirstOrDefaultAsync(s => s.Id == id && s.UserId == user.Id);
 
                 return View(storyFromDb);
+
             }
-            else
-            {
-                return NotFound();
-            }
+
+            return NotFound();
+
         }
 
         public async Task<IActionResult> CreateChapter(int id)
@@ -82,7 +84,7 @@ namespace RantoryWeb.Areas.User.Controllers
                     _dbContext.ChapterNameSources.Update(chapterNameFromDb);
                     await _dbContext.SaveChangesAsync();
 
-                    return RedirectToAction(nameof(Index), storyFromDb);
+                    return RedirectToAction(nameof(Index), new {id = storyFromDb.Id});
                 }
                 else
                 {
@@ -173,7 +175,7 @@ namespace RantoryWeb.Areas.User.Controllers
                         TempData["ChapterSuccess"] = "Chapter updated successfully!";
                         TempData["ChapterName"] = chapterFromDb.ChapterName;
 
-                        return RedirectToAction(nameof(Index), storyFromDb);
+                        return RedirectToAction(nameof(Index), new {id = storyFromDb.Id});
 
                     }
                     else

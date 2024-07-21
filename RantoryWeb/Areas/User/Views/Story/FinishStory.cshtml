@@ -1,1 +1,279 @@
-﻿<h3>Any Stepe For Finish Story</h3>
+﻿@model Story
+
+
+@{
+    string? noName = TempData["nameIsNull"] as string;
+    string? emptyContent = TempData["emptyContent"] as string;
+    string? sameName = TempData["sameName"] as string;
+    string? countSameName = TempData["countSameName"] as string;
+    string? unableToName = TempData["unableToName"] as string;
+    string? title = TempData["title"] as string;
+}
+
+<!-- Finish Story Start -->
+<div class="container-xxl py-5">
+
+    <div class="container">
+        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <p class="my-section-title bg-white text-center px-3">Finish Your Story</p>
+        </div>
+
+        <div class="row">
+            <div class="wow fadeInUp" data-wow-delay="0.1s">
+                <div class="pt-2">
+
+                    @if (!string.IsNullOrEmpty(noName) && noName == "Name not entered")
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong><i class="bi bi-exclamation-triangle"></i> Oops !</strong> It looks like you forgot to name your story. Please provide a title to continue.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(unableToName) && unableToName == "Unable to name.")
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong><i class="bi bi-hourglass-split"></i> Titles can wait !</strong> The most important thing is to get your creative juices flowing. Write something awesome and then name it later.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(sameName) && sameName == "Same name.")
+                    {
+                        string time = countSameName == "one" ? "time" : "times";
+
+                        <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+                            <strong><i class="bi bi-exclamation-triangle"></i> Notice :</strong> The title you've chosen is already in use by another author.<br />
+                            This title has been used<strong> @countSameName @time already.</strong><br />
+                            You can pick a new one or stick with it—your call!
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <form method="post" asp-area="User" asp-controller="Story" asp-action="FinishStory">
+
+                                <input asp-for="@Model.UserId" hidden />
+                                <input asp-for="@Model.Id" hidden />
+
+                                <div class="chapter-form-floating col-auto">
+                                    <input asp-for="@title" type="text" class="chapter-form-control" placeholder="" style="width: 600px;">
+                                </div>
+
+                                <div class="modal-footer-delete mt-4 mb-4">
+                                    <button class="save-button save-box" style="font-size:medium" type="submit">Confirm Name</button>
+                                </div>
+
+                            </form>
+
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex justify-content-center">
+
+                            <div class="chapter-form-floating col-auto">
+                                <input asp-for="@Model.Title" type="text" class="chapter-form-control" placeholder="">
+                                <label asp-for="@Model.Title"></label>
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+            <div class="wow fadeInUp" data-wow-delay="0.3s">
+                <div class="text-center mt-2 mb-5">
+                    <h3>All Chapter In This Story</h3>
+                    <p style="font-size:large">
+                        Your story has the power to captivate, inspire, and move readers.<br />
+                        Trust in your creativity and let your words reach the world.<br />
+                        Hit "Finish" with confidence and share your unique voice with eager readers who await your tale.<br />
+                        Your story matters, and now is the time to let it shine.
+                    </p>
+                </div>
+
+                @if (!string.IsNullOrEmpty(emptyContent) && emptyContent == "There is no content in the chapter.")
+                {
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong><i class="bi bi-exclamation-triangle"></i> Some chapters in your story are currently empty.</strong> Please add content to proceed.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                <!-- Chapter Start -->
+                <section class="articles mb-4">
+                    @{
+                        int number = 1;
+                    }
+
+                    @foreach (Chapter chapter in Model.Chapters)
+                    {
+                        <input asp-for="@Model.UserId" hidden />
+                        <input asp-for="@chapter.Id" hidden />
+                        <input asp-for="@Model.Id" hidden />
+
+                        if (chapter.UserId == Model.UserId && chapter.StoryId == Model.Id)
+                        {
+                            <article>
+                                <div class="article-wrapper">
+                                    <figure>
+                                        <img src="/dairyTheme/img/banner-1.jpg" alt="" />
+                                    </figure>
+                                    <div class="article-body">
+                                        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                                            <p class="my-section-title bg-white text-center px-3">Chapter @number</p>
+                                            <h4 class="text-dark mb-3">@chapter.ChapterName</h4>
+                                        </div>
+                                        <div class="text-left-custom chapter-p">
+                                            @if (chapter.Content is not null && chapter.Content.Length > 200)
+                                            {
+                                                @Html.Raw(chapter.Content.Substring(0, 200))
+                                                <span> . . . .</span>
+                                            }
+                                            else if (chapter.Content is not null && chapter.Content.Length < 200)
+                                            {
+                                                @Html.Raw(chapter.Content)
+                                            }
+                                            else
+                                            {
+                                                <p>- - - You have not added any content to this chapter. - - -</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Icon Button Start -->
+                                <div class="icon-button-chapter-container mb-5 justify-content-center">
+                                    <div class="icon-button-chapter-container">
+                                        <div class="icon-button-chapter" data-tooltip="Edit Cover Image">
+                                            <a href=""><i class="bi bi-image"></i></a>
+                                        </div>
+                                        <div class="icon-button-chapter" data-tooltip="Update Chapter">
+                                            <a href=""><i class="bi bi-pencil-square"></i></a>
+                                        </div>
+                                        <div class="icon-button-chapter" data-tooltip="Read More">
+                                            <a data-bs-toggle="modal" data-bs-target="#exampleModal-@number"><i class="bi bi-chevron-double-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Icon Button End -->
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal-@number" tabindex="-1" aria-labelledby="exampleModalLabel-@number" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel-@number">Chapter @number : @chapter.ChapterName</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body text-left-custom chapter-p">
+                                                @Html.Raw(chapter.Content)
+                                            </div>
+                                            <div class="modal-footer">
+
+                                                <form method="get" asp-area="User" asp-controller="Chapter" asp-action="EditChapter">
+
+                                                    <input name="chapterId" value="@chapter.Id" hidden />
+                                                    <input name="storyId" value="@Model.Id" hidden />
+
+                                                    <button type="button" class="close-button save-box" data-bs-dismiss="modal">Close</button>
+
+                                                    <button type="submit" class="update-button save-box">
+                                                        Update
+                                                    </button>
+
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            number++;
+                        }
+                    }
+                </section>
+            </div>
+
+        </div>
+    </div>
+
+    @if (string.IsNullOrEmpty(sameName))
+    {
+        <!-- Button trigger modal -->
+        <div class="modal-footer-delete mt-5">
+            <button type="button" class="save-button save-box" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Finish
+            </button>
+        </div>
+    }
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Finish Story</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="icon-delete-story-container icon-random-story mt-2">
+                        <i class="bi bi-book"></i>
+                    </div>
+
+                    @* @if (!string.IsNullOrEmpty(sameName) && sameName == "Same name.")
+                    {
+                    string time = countSameName == "one" ? "time" : "times";
+
+                    <div>
+                    <p>
+                    <strong><i class="bi bi-exclamation-triangle"></i> Notice :</strong> The title you've chosen is already in use by another author.<br />
+                    This title has been used<strong> @countSameName @time already.</strong><br />
+                    You can pick a new one or stick with it—your call!
+                    </p>
+                    </div>
+                    } *@
+
+                    <div class="text-center mt-2" style="font-size:18px">
+                        Once you click 'Finish Story',<br />
+                        you won't be able to edit the content or title.<br />
+                        Please review your story carefully before proceeding.
+                    </div>
+
+                </div>
+                <div class="modal-footer modal-footer-delete">
+                    <button type="button" class="close-random-button" data-bs-dismiss="modal">Close</button>
+
+                    <form method="post" asp-action="FinishStory">
+                        <input asp-for="@Model.Id" hidden />
+                        <input asp-for="@Model.UserId" hidden />
+                        <input asp-for="@Model.Title" class="story-name" hidden />
+
+                        <button type="submit" class="random-button" style="width:180px;">Finish Story !</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Finish Story End -->
+
+
+
+<script>
+    const title = document.querySelector(".story-name")
+    const mainTitle = document.querySelector(".chapter-form-control")
+
+    function updateTitle() {
+        title.value = mainTitle.value;
+    }
+
+    mainTitle.addEventListener("input", updateTitle);
+
+    updateTitle();
+</script>

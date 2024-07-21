@@ -26,7 +26,6 @@
 }
 
 <!-- Index Chapter Start -->
-
 @if (Model != null)
 {
     <div class="team-item rounded p-4">
@@ -140,7 +139,10 @@
                                         <a href=""><i class="bi bi-image"></i></a>
                                     </div>
                                     <div class="icon-button-chapter" data-tooltip="Update Chapter">
-                                        <a href=""><i class="bi bi-pencil-square"></i></a>
+                                        <a asp-area="User" asp-controller="Chapter" asp-action="EditChapter" 
+                                           asp-route-chapterId="@chapter.Id" asp-route-storyId="@chapter.StoryId">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
                                     </div>
                                     <div class="icon-button-chapter" data-tooltip="Read More">
                                         <a data-bs-toggle="modal" data-bs-target="#exampleModal-@number"><i class="bi bi-chevron-double-right"></i></a>
@@ -184,6 +186,16 @@
                 }
             </section>
         </div>
+
+        <div class="mt-4" style="display: flex; justify-content: center;">
+            <a asp-area="User" asp-controller="Story" asp-action="Index"
+               class="save-button save-box" style="width: 300px; margin-right: 20px;">
+
+                <i class="bi bi-chevron-double-left"></i> Back to Stories
+
+            </a>
+        </div>
+
     </div>
 
 }

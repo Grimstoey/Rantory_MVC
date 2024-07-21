@@ -18,13 +18,16 @@
         </div>
 
 
-        <div class="mt-5">
+        <div class="mt-5 mb-5">
             <textarea asp-for="@Model.Chapter.Content" id="mytextarea"></textarea>
         </div>
 
-        <div class="button-container-end mt-5">
-            <a asp-area="User" asp-controller="Home" asp-action="Index" type="submit" class="save-button save-box">
-                Finish
+        <div class="mt-4" style="display: flex; justify-content: center; width: 100%;">
+            <a asp-area="User" asp-controller="Chapter" asp-action="Index" asp-route-id="@Model.Story.Id"
+             class="save-button save-box" style="width: 300px; margin-right: 20px;">
+
+                <i class="bi bi-chevron-double-left"></i> Back to Chapters
+
             </a>
             <button type="submit" class="save-button save-box">
                 Save

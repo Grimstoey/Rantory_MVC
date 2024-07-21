@@ -13,7 +13,8 @@ namespace Rantory.Models
         [Key]
         public int Id { get; set; }
 
-        public string? Title { get; set; } = "Untile";
+        [Display(Name = "The title of this story")]
+        public string? Title { get; set; } = "Untitled";
 
         public string UserId { get; set; }
         [ForeignKey("UserId")]
@@ -22,6 +23,8 @@ namespace Rantory.Models
         public ICollection<Chapter> Chapters { get; set; } = new List<Chapter>();
 
         public bool FinishStatus { get; set; } = false;
+
+        //public string? Description { get; set; }
 
     }
 }
