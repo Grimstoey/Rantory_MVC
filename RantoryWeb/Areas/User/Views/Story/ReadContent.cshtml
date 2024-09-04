@@ -2,49 +2,64 @@
 
 
 <!-- Read Content Start -->
-<div class="team-item rounded p-4 mt-5">
-    <div class="container-xxl py-5">
-        <div class="container mt-4">
-            <div class="text-center mx-auto pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="my-section-title bg-white text-center px-3">Read Story</p>
-                <h2 class="">@Model.Story.Title</h2>
-                <h5>
-                    by<br />
-                </h5>
-                <h6 class="mb-5">
-                    <a href="">@Model.Story.User.UserName</a>
-                </h6>
-            </div>
 
-            @if (Model.Story.Id == Model.Chapter.StoryId)
-            {
-                int number = 1;
+<div class="container-xxl py-5">
+    <div class="container mt-4">
+        <div class="text-center mx-auto pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <p class="my-section-title bg-white text-center px-3">Read Story</p>
+            <h2 class="">@Model.Story.Title</h2>
+            <h5>
+                by<br />
+            </h5>
+            <h6 class="mb-5">
+                <a href="">@Model.Story.User.UserName</a>
+            </h6>
+        </div>
 
-                <div class="row">
-                    <div class="col-4 text-left-custom mx-auto pb-4 wow fadeInUp" data-wow-delay="0.1s">
-                        <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
-                            <nav class="nav nav-pills flex-column">
-                                @foreach (Chapter chapter in Model.Story.Chapters)
-                                {
-                                    <a class="p-1 rounded" href="#item-@number"><span style="font-size:large;">Chapter @number @chapter.ChapterName</span></a>
-                                    number++;
-                                }
+        @if (Model.Story.Id == Model.Chapter.StoryId)
+        {
+            int number = 1;
 
-                                @{
-                                    number = 1;
-                                }
-                            </nav>
-                        </nav>
-                    </div>
-
-                    <div class="col-8 wow fadeInUp" data-wow-delay="0.1s">
-                        <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
-
-                            @foreach (Chapter content in Model.Story.Chapters)
+            <div class="row">
+                <div class="col-4 text-left-custom mx-auto pb-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
+                        <nav class="nav nav-pills flex-column">
+                            @foreach (Chapter chapter in Model.Story.Chapters)
                             {
-                                <div id="item-@number">
-                                    <h4>Chapter @number @content.ChapterName</h4>
+                                <div class="pt-4">
+                                    <a class="p-1 rounded icon-button-chapter text-center" style="width:auto; height:auto;" href="#item-@number">
+                                        <span class="p-2" style="margin-top:auto; margin-bottom:auto; color:#a7a7a7; font-weight:500">
+                                            Chapter @number<br /> @chapter.ChapterName
+                                        </span>
+                                    </a>
+                                </div>
+                                number++;
+                            }
 
+                            @{
+                                number = 1;
+                            }
+                        </nav>
+                    </nav>
+                </div>
+
+                <div class="col-8 wow fadeInUp" data-wow-delay="0.1s">
+                    <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+
+                        @foreach (Chapter content in Model.Story.Chapters)
+                        {
+                            <div class="team-item mb-5 p-5">
+                                <div id="item-@number">
+
+                                    <div class="mb-5 mt-3">
+                                        <img src="/dairyTheme/img/product-3.jpg" style="height: 450px; width: 700px; border-radius: 10px;" alt="" />
+                                    </div>                                
+
+                                    <div>
+                                        <h5 class="mb-3">Chapter @number</h5>
+                                        <h4>@content.ChapterName</h4>
+                                    </div>
+                                    
                                     <div class="text-left-custom chapter-p">
                                         <p>
                                             @Html.Raw(content.Content)
@@ -52,20 +67,21 @@
                                     </div>
 
                                 </div>
+                            </div>
+                            
 
 
-                                number++;
-                            }
+                            number++;
+                        }
 
-                        </div>
                     </div>
                 </div>
+            </div>
+
+        }
 
 
-            }
-
-
-        </div>
     </div>
 </div>
+
 <!-- Read Content End -->
